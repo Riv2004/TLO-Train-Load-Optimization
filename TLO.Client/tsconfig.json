@@ -1,0 +1,32 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noFallthroughCasesInSwitch": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "dom"],
+    "useDefineForClassFields": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputTypes": true,
+    "strictTemplates": true
+  },
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tlo
+      POSTGRES_PASSWORD: tlo
+      POSTGRES_DB: tlo
+    ports:
+      - "5432:5432"
+    volumes:
+      - tlo-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tlo -d tlo"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  tlo-pg:

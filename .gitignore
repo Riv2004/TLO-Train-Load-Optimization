@@ -1,0 +1,29 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+publish/
+*.nupkg
+[Tt]est[Rr]esult*
+
+# Node
+node_modules/
+TLO.Client/dist/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
