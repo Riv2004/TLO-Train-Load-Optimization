@@ -1,0 +1,132 @@
+// Prisma schema for the Train Load Optimization yard.
+// Replaces the in-memory Store. Keep the same shape so app.ts and services
+// can stay unchanged — only the persistence layer swaps over.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Destination {
+  destId String @id
+  name   String
+}
+
+model User {
+  username String @id
+  role     String
+  salt     String
+  hash     String
+}
+
+model Locomotive {
+  locoId      String      @id
+  railLine    Int
+  orientation String     // 'H' or 'V'
+  x           Float
+  y           Float
+  status      String     // 'Available' or 'Not Available'
+  destination String     // display name
+  destId      String
+  plans       LoadPlan[] @relation("LocoPlans")
+  @@index([destId])
+}
+
+model Railcar {
+  railCarId    String     @id
+  type         String     // 'A' or 'B'
+  weight       Int
+  status       String     // 'Available' or 'LOADED'
+  order        Int?
+  x            Float?
+  y            Float?
+  orientation  String?    // 'H', 'V', or null until assigned
+  destId       String
+  wells        Well[]
+  assignments Assignment[]
+  @@index([destId])
+}
+
+model Well {
+  wellId       String      @id
+  railCarId    String
+  railcar      Railcar     @relation(fields: [railCarId], references: [railCarId])
+  maxLengthFt  Int
+  weightLimit  Int
+  slots        Slot[]
+  assignments Assignment[]
+  @@index([railCarId])
+}
+
+model Slot {
+  slotId     String       @id
+  wellId     String
+  well       Well         @relation(fields: [wellId], references: [wellId])
+  railCarId  String
+  slotType   String       // 'BOTTOM' or 'TOP'
+  x          Float
+  y          Float
+  assignments Assignment[]
+  @@index([wellId])
+}
+
+model Container {
+  containerId String       @id
+  sizeFt      Int
+  weight      Int
+  x           Float
+  y           Float
+  yardTier    Int
+  zoneId      String
+  priority    String       // 'Critical', 'High', 'Normal'
+  status      String       // 'Available' or 'ASSIGNED'
+  destId      String
+  assignments Assignment[]
+  @@index([destId])
+}
+
+model Assignment {
+  assignmentId String    @id
+  planId       Int
+  lineNo       Int
+  containerId  String
+  railCarId    String
+  wellId       String
+  slotId       String
+  slotType     String
+  railLine     Int
+  score        Float
+  travel       Float
+  dig          Float
+  reposition   Float
+  zone         Float
+  cost         Float
+  lifts        Int
+  plan         LoadPlan  @relation(fields: [planId], references: [planId])
+  container    Container @relation(fields: [containerId], references: [containerId])
+  railcar      Railcar   @relation(fields: [railCarId], references: [railCarId])
+  well         Well      @relation(fields: [wellId], references: [wellId])
+  slot         Slot      @relation(fields: [slotId], references: [slotId])
+  @@index([planId])
+  @@index([containerId])
+}
+
+model LoadPlan {
+  planId         Int          @id @default(autoincrement())
+  createdAt      DateTime     @default(now())
+  createdBy      String
+  destId         String
+  destName       String
+  locoId         String
+  railLine       Int
+  kpis           Json?
+  unassigned     Json?
+  locoCandidates Json?
+  assignments    Assignment[]
+  locomotive     Locomotive  @relation("LocoPlans", fields: [locoId], references: [locoId])
+  @@index([destId])
+  @@index([createdAt])
+}
