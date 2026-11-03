@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using TLO.Api.Data;
 
-namespace TLO.Api.Business;
+namespace TLO.Api.Services;
 
 public class AuthService : IAuthService
 {

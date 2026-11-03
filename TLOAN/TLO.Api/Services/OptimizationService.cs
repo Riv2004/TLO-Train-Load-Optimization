@@ -4,7 +4,7 @@ using TLO.Api.Data;
 using TLO.Api.DTOs;
 using TLO.Api.Models;
 
-namespace TLO.Api.Business;
+namespace TLO.Api.Services;
 
 public interface IOptimizationService
 {

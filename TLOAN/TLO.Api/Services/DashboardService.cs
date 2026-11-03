@@ -2,7 +2,7 @@ using System.Text.Json;
 using TLO.Api.Data;
 using TLO.Api.DTOs;
 
-namespace TLO.Api.Business;
+namespace TLO.Api.Services;
 
 public interface IDashboardService
 {

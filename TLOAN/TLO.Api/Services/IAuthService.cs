@@ -1,4 +1,4 @@
-namespace TLO.Api.Business;
+namespace TLO.Api.Services;
 
 public interface IAuthService
 {

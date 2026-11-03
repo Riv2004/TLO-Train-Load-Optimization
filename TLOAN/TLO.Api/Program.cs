@@ -1,11 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -17,7 +11,7 @@ using System;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using TLO.Api.Business;
+using TLO.Api.Services;
 using TLO.Api.Data;
 using TLO.Api.Repositories;
 

@@ -1,6 +1,6 @@
 using TLO.Api.Models;
 
-namespace TLO.Api.Business;
+namespace TLO.Api.Services;
 
 public interface IDestinationService
 {

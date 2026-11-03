@@ -1,7 +1,7 @@
 using TLO.Api.Data;
 using TLO.Api.Models;
 
-namespace TLO.Api.Business;
+namespace TLO.Api.Services;
 
 public class DestinationService : IDestinationService
 {
